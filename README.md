@@ -33,3 +33,6 @@ Die Benachrichtigungsfunktion informiert die Nutzer über den Ablauf ihrer Parkp
 ## Fazit
 
 Die Smarte Parkplatzlösung mit Schwerpunkten auf Reservierung, Navigation und Verfügbarkeit bietet eine Antwort auf das wachsende Problem des Parkplatzmangels in Städten und urbanen Gebieten. Mit dieser innovativen Technologie wird nicht nur der Alltag der Fahrer erleichtert, sondern auch der Verkehrsfluss und die Umweltqualität in den Städten verbessert. Die Zukunft der Parkplatzsuche ist smart und effizient.
+
+
+## Domänenmodell
