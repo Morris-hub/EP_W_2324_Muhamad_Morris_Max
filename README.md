@@ -10,7 +10,7 @@ In diesem System stehen Parkplätze im Mittelpunkt, einschließlich Parkhäuser 
 
 ## Reservierung
 
-Das System ermöglicht es den Nutzern, einen Parkplatz im Voraus zu reservieren. Dies bedeutet, dass Sie sich nicht mehr im Wettlauf um freie Parkplätze befinden müssen. Mit einer einfachen App oder Plattform können Sie Ihren Parkplatz für eine bestimmte Zeit reservieren. Dies erhöht nicht nur die Bequemlichkeit, sondern reduziert auch den Stress, der oft mit der Parkplatzsuche verbunden ist.
+Das System ermöglicht es den Nutzern, einen Parkplatz im Voraus zu reservieren. Dies bedeutet, dass Sie sich nicht mehr im Wettlauf um freie Parkplätze befinden müssen. Mit einem einfachen System können Sie Ihren Parkplatz für eine bestimmte Zeit reservieren. Dies erhöht nicht nur die Bequemlichkeit, sondern reduziert auch den Stress, der oft mit der Parkplatzsuche verbunden ist.
 
 ## Navigation
 
