@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkingsystem - Reservierung</title>
+    <style>
+        /* Füge hier deine CSS-Stile hinzu */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Parkingsystem - Reservierung</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Reservierung vornehmen</h2>
+            <form id="reservationForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="parkingLot">Parkplatznummer:</label>
+                <input type="text" id="parkingLotReservation" name="parkingLotReservation" required>
+                <button type="button" onclick="makeReservation()">Reservieren</button>
+            </form>
+            <p id="reservationMessage"></p>
+
+            <!-- Zurück-Button -->
+            <button onclick="goBack()">Zurück</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Parkingsystem. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script>
+        // Beispiel JavaScript-Funktionen
+        function makeReservation() {
+            // Hier könntest du den Code für die Reservierung einfügen
+            document.getElementById('reservationMessage').innerText = 'Reservierung erfolgreich!';
+        }
+
+        // Funktion für den Zurück-Button
+        function goBack() {
+            // Hier kannst du den Code für die Navigation zur park1.html einfügen
+            window.location.href = 'park1.html';
+        }
+    </script>
+
+</body>
+</html>
