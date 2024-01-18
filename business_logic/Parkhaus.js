@@ -6,6 +6,8 @@ class Parkplatz {
         this.parkhaus = parkhaus;
     }
 
+
+
     parken() {
         this.belegt = true;
         console.log(`Parkplatz ${this.id} wurde belegt.`);
@@ -25,6 +27,9 @@ class Parkplatz {
 
 
 class Parkhaus {
+
+    //Kapazität 
+
 
     constructor(id, name, adresse) {
         this.id = id;
@@ -47,7 +52,7 @@ class Parkhaus {
     }
 }
 
-module.exports = Parkhaus;
+export default Parkhaus;
 
 
 class Reservierung {
@@ -62,6 +67,8 @@ class Reservierung {
         this.parkplatz.parken();
     }
 }
+
+
 
 class Kunde {
     constructor(id, parkhaus, ticket, reservierung) {
@@ -91,7 +98,7 @@ class ParkplatzWeb {
         return true; // Erfolgreiche Zahlung
     }
 }
-/*
+
 // Beispielanwendung
 const parkhaus = new Parkhaus(1, 'Test Parkhaus', 'Musterstraße 123');
 const parkplatz1 = new Parkplatz(1, false, parkhaus);
@@ -102,7 +109,7 @@ const ticket1 = new Ticket(1, 2);
 parkhaus.parkplaetze.push(parkplatz1, parkplatz2);
 
 const webInterface = new ParkplatzWeb(parkhaus);
-*/
+
 
 /*
 // Beispielaufrufe
