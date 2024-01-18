@@ -5,16 +5,14 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const json = '{"result":true, "count":42}';
-const obj = JSON.parse(json);
 
 
 app.use(express.static('public'));
-const ParkhausData = new Parkhaus();
 
 //Alle Daten des Parkhausese
 app.get('/parkhausOverview', (req, res) => {
-    res.send(ParkhausData);
+    const ParkhausData = new Parkhaus("1", "Parkhaus 1", "Musterstraße 1");
+    res.send(JSON.stringify(ParkhausData));
 });
 
 

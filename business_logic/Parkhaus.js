@@ -47,29 +47,8 @@ class Parkhaus {
     }
 }
 
-class Ticket {
-    constructor(id, kostenPer30Min) {
-        this.id = id;
-        this.kostenPer30Min = kostenPer30Min;
-        this.zeitEinfahren = null;
-        this.zeitAusstempeln = null;
-    }
+module.exports = Parkhaus;
 
-    einfahren() {
-        this.zeitEinfahren = new Date();
-        console.log(`Kunde mit Ticket ${this.id} ist eingefahren um ${this.zeitEinfahren}`);
-    }
-
-    ausstempeln() {
-        this.zeitAusstempeln = new Date();
-        console.log(`Kunde mit Ticket ${this.id} hat sich um ${this.zeitAusstempeln} ausgesptempelt `);
-    }
-
-    ZietHinzufügenInStunden(zeitInStunden) {
-        this.zeitAusstempeln.setHours(zeitInStunden);
-    }
-
-}
 
 class Reservierung {
     constructor(id, parkhaus, parkpaltz, laengeReserviereungInMin) {
@@ -112,7 +91,7 @@ class ParkplatzWeb {
         return true; // Erfolgreiche Zahlung
     }
 }
-
+/*
 // Beispielanwendung
 const parkhaus = new Parkhaus(1, 'Test Parkhaus', 'Musterstraße 123');
 const parkplatz1 = new Parkplatz(1, false, parkhaus);
@@ -123,7 +102,9 @@ const ticket1 = new Ticket(1, 2);
 parkhaus.parkplaetze.push(parkplatz1, parkplatz2);
 
 const webInterface = new ParkplatzWeb(parkhaus);
+*/
 
+/*
 // Beispielaufrufe
 parkhaus.einfahren();
 parkplatz1.parken();
@@ -138,3 +119,4 @@ ticket1.einfahren();
 ticket1.ausstempeln();
 ticket1.ZietHinzufügenInStunden(22);
 console.log(ticket1.zeitAusstempeln);
+*/
