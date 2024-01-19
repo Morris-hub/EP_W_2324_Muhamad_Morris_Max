@@ -1,7 +1,6 @@
-const Parkhaus = require('/business_logic/Parkhaus.js'); // Passe den Pfad entsprechend an
-// const Parkplatz = require('./business_logic/Parkplatz.js'); // Passe den Pfad entsprechend an
-
-// import Parkhaus from './business_logic/Parkhaus.js';
+const Parkhaus = require('./framework/Parkhaus.js'); // Passe den Pfad entsprechend an
+const Parkhaus2 = require('./framework/Parkhaus2.js'); // Passe den Pfad entsprechend an
+const Parkplatz = require('./framework/Parkplatz.js'); // Passe den Pfad entsprechend an
 
 const express = require('express');
 const app = express();
@@ -11,14 +10,17 @@ const port = 3000;
 
 app.use(express.static('public'));
 
+
+app.get('/index', (req, res) => {
+    const ParkhausData2 = new Parkhaus2("1", "Parkhaus 1", "Musterstraße 1");
+    ParkhausData2.toJSON();
+});
+
 //Alle Daten des Parkhaus
-app.get('/parkhausOverview', (req, res) => {
+app.get('/', (req, res) => {
 
     const ParkhausData = new Parkhaus("1", "Parkhaus 1", "Musterstraße 1");
-    const parkplatz1 = new Parkplatz(1, false, ParkhausData);
-    const parkplatz2 = new Parkplatz(2, false, ParkhausData);
-    ParkhausData.parkplaetze.push(parkplatz1, parkplatz2);
-    res.send(JSON.stringify(ParkhausData));
+    res.send(ParkhausData.erstelleJSON());
 });
 
 
@@ -39,8 +41,6 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/index', (req, res) => {
-    res.redirect('park1.html');
-});
+
 app.listen(port, () => console.log
     (`App listening on http://localhost:${port}`));

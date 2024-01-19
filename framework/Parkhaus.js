@@ -1,31 +1,3 @@
-class Parkplatz {
-
-    constructor(id, belegt, parkhaus) {
-        this.id = id;
-        this.belegt = belegt;
-        this.parkhaus = parkhaus;
-    }
-
-
-
-    parken() {
-        this.belegt = true;
-        console.log(`Parkplatz ${this.id} wurde belegt.`);
-        this.parkhaus.anzahlBegegterParkplaetze++;
-    }
-
-    verlassen() {
-        this.belegt = false;
-        console.log(`Parkplatz ${this.id} wurde freigegeben.`);
-        this.parkhaus.anzahlBegegterParkplaetze--;
-    }
-
-    sendeNachricht(message) {
-        console.log(`Nachricht von Parkplatz ${this.id}: ${message}`);
-    }
-}
-
-
 class Parkhaus {
 
     //Kapazität 
@@ -35,7 +7,7 @@ class Parkhaus {
         this.id = id;
         this.name = name;
         this.adresse = adresse;
-        this.parkplaetze = [];
+        this.parkplaetze = new Array(20);
         this.anzahlBegegterParkplaetze = 0;
     }
 
@@ -50,34 +22,27 @@ class Parkhaus {
         const aktuelleZeit = new Date();
         console.log(`Ein Fahrzeug ist am ${aktuelleZeit} ausgefahren.`);
     }
-}
 
-export default Parkhaus;
-
-
-class Reservierung {
-    constructor(id, parkhaus, parkpaltz, laengeReserviereungInMin) {
-        this.id = id;
-        this.parkhaus = parkhaus;
-        this.parkplatz = parkpaltz;
-        this.laengeReservierungInMin = laengeReserviereungInMin;
+    erstelleJSON() {
+        return {
+            parkhaus: {
+                name: this.name,
+                standort: this.standort,
+                kapazitaet: this.kapazitaet,
+                verfuegbarePlaetze: this.verfuegbarePlaetze,
+                parkplaetze: this.parkplaetze
+            }
+        };
     }
 
-    reservieren() {
-        this.parkplatz.parken();
+    verfügbar() {
+
     }
 }
 
+module.exports = Parkhaus;
 
 
-class Kunde {
-    constructor(id, parkhaus, ticket, reservierung) {
-        this.id = id;
-        this.parkhaus = parkhaus;
-        this.ticket = ticket;
-        this.reservierung = reservierung;
-    }
-}
 
 class ParkplatzWeb {
     constructor(parkhaus) {
@@ -100,10 +65,11 @@ class ParkplatzWeb {
 }
 
 // Beispielanwendung
+
+/*
 const parkhaus = new Parkhaus(1, 'Test Parkhaus', 'Musterstraße 123');
 const parkplatz1 = new Parkplatz(1, false, parkhaus);
 const parkplatz2 = new Parkplatz(2, true, parkhaus);
-
 const ticket1 = new Ticket(1, 2);
 
 parkhaus.parkplaetze.push(parkplatz1, parkplatz2);
