@@ -20,18 +20,14 @@
 
         parken() {
             this.belegt = true;
-            console.log(`Parkplatz ${this.id} wurde belegt.`);
+            console.log(`Parkplatz ${this.id} ist belegt.`);
 			this.parkhaus.anzahlBegegterParkplaetze++;
         }
 
         verlassen() {
             this.belegt = false;
-            console.log(`Parkplatz ${this.id} wurde freigegeben.`);
+            console.log(`Parkplatz ${this.id} ist freigegeben.`);
 			this.parkhaus.anzahlBegegterParkplaetze--;
-        }
-
-        sendeNachricht(message) {
-            console.log(`Nachricht von Parkplatz ${this.id}: ${message}`);
         }
     }
 	
@@ -58,29 +54,91 @@
         }
     }
 	
+    //verwende ("fs") ein von Node.js-Dateisystemmodul um in einer Datei etwas zu speichern, aktualisieren und zu löschen.
+    const fs = require('fs');
+
 	class Ticket {
-    constructor(id, kostenPer30Min) {
-        this.id = id;
-        this.kostenPer30Min = kostenPer30Min;
-        this.zeitEinfahren = null;
-        this.zeitAusstempeln = null;
-    }
+        constructor(id, kostenPer30Min) {
+            this.id = id;
+            this.kostenPer30Min = kostenPer30Min;
+            this.zeitEinfahren = null;
+            this.zeitAusstempeln = null;
+        }
 
-    einfahren() {
-        this.zeitEinfahren = new Date();
-        console.log(`Kunde mit Ticket ${this.id} ist eingefahren um ${this.zeitEinfahren}`);
-    }
+        einfahren() {
+            this.zeitEinfahren = new Date();
+            const einfahrenInfo = {
+                ticketId: this.id,
+                zeitEinfahren: this.zeitEinfahren.toISOString(),
+                message: `Kunde mit Ticket ${this.id} ist um ${this.zeitEinfahren} eingefahren `,
+            };
 
-    ausstempeln(){
-        this.zeitAusstempeln = new Date();
-        console.log(`Kunde mit Ticket ${this.id} hat sich um ${this.zeitAusstempeln} ausgesptempelt `);     
-    }
+            const jsonString = JSON.stringify(einfahrenInfo);
 
-    ZietHinzufügenInStunden(zeitInStunden){
-        this.zeitAusstempeln.setHours(zeitInStunden);   
-    }
+            this.speichernInDatei(jsonString, 'einfahren');
+        
+            return jsonString;
+        }
 
-}
+        ausstempeln(){
+            this.zeitAusstempeln = new Date();
+            const ausstempelnInfo = {
+                ticketId: this.id,
+                zeitAusstempeln: this.zeitAusstempeln.toISOString(),
+                message: `Kunde mit Ticket ${this.id} hat sich um ${this.zeitAusstempeln} ausgestempelt`,
+            };
+
+            const jsonString = JSON.stringify(ausstempelnInfo);
+
+            this.speichernInDatei(jsonString, 'ausstempeln');
+        
+            return jsonString;
+        }
+
+        speichernInDatei(jsonString, aktion){
+            const dateiName = 'DB.json';
+ 
+            // Speichern in Datei
+            fs.writeFileSync(dateiName, jsonString);
+
+            // Optional: Laden und Aktualisieren der JSON-Datei
+            const gespeicherterInhalt = JSON.parse(fs.readFileSync(dateiName, 'utf-8'));
+            // Hier können Sie den Inhalt aktualisieren, wenn nötig
+
+            // Löschen der JSON-Datei nach Verwendung (optional)
+            // fs.unlinkSync(dateiName);
+
+        }
+
+        setStundeZeitAusstempeln(zeitInStunden){
+            if(!this.zeitAusstempeln){
+                this.zeitAusstempeln = new Date();
+            }
+
+            this.zeitAusstempeln.setHours(zeitInStunden);   
+        }
+
+        setMinutenZeitAusstempeln(zeitInMinuten){
+            if(!this.zeitAusstempeln){
+                this.zeitAusstempeln = new Date();
+            }
+
+            this.zeitAusstempeln.setMinutes(zeitInMinuten);
+        }
+
+        berechneZeitdifferenInMin(){
+            
+            return (this.zeitAusstempeln.getHours() * 60 + this.zeitAusstempeln.getMinutes()) - 
+                   (this.zeitEinfahren.getHours()* 60 + this.zeitEinfahren.getMinutes()); 
+        }
+
+        berechneKosten(){
+           
+            return Math.ceil(this.berechneZeitdifferenInMin() / 30) * this.kostenPer30Min;
+        }
+
+
+    }
 	
 	class Reservierung{
 		constructor(id, parkhaus, parkpaltz, laengeReserviereungInMin){
@@ -88,10 +146,6 @@
 		this.parkhaus = parkhaus;
 		this.parkplatz = parkpaltz;
 		this.laengeReservierungInMin = laengeReserviereungInMin;
-		}
-		
-		reservieren(){
-		this.parkplatz.parken();
 		}
 	}
 	
@@ -129,14 +183,14 @@
     const parkplatz1 = new Parkplatz(1, false, parkhaus);
     const parkplatz2 = new Parkplatz(2, true, parkhaus);
 	
-	const ticket1 = new Ticket(1, 2);
+	const ticket1 = new Ticket(1, 2.5);
 
     parkhaus.parkplaetze.push(parkplatz1, parkplatz2);
 
     const webInterface = new ParkplatzWeb(parkhaus);
 
     // Beispielaufrufe
-	parkhaus.einfahren();
+	/*parkhaus.einfahren();
     parkplatz1.parken();
 	parkhaus.einfahren();
     parkplatz2.parken();
@@ -144,12 +198,34 @@
 	parkhaus.ausfahren();
     webInterface.zeigeParkplatzStatus();
     webInterface.bezahleMitPayPal(5.0);
-	
-    ticket1.einfahren();
+	*/
+    console.log(ticket1.einfahren());
     ticket1.ausstempeln();
-    ticket1.ZietHinzufügenInStunden(22);
+    ticket1.setStundeZeitAusstempeln(new Date().getHours() + 5);
     console.log(ticket1.zeitAusstempeln);
+    console.log(ticket1.berechneZeitdifferenInMin());
+    console.log(ticket1.berechneKosten());
+    ticket1.setMinutenZeitAusstempeln(new Date().getMinutes() + 2);
+    console.log(ticket1.berechneKosten());
+    ticket1.setMinutenZeitAusstempeln(new Date().getMinutes() + 32);
+    console.log(ticket1.berechneKosten());
 </script>
 
 </body>
 </html>
+
+/*
+
+{
+available: "5",
+
+ParkinglotID: [
+{id:"12"},
+{id:"14"},
+{id:"10"},
+{id:"15"},
+{id:"20"},
+]
+
+}
+*/
