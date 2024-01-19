@@ -60,14 +60,7 @@
         //JavaScript-Funktion
         function checkAvailability() {
             var parkingLotNumber = document.getElementById('parkingID').value;
-            
-             var availabilityData = {
-                    parkingLot: parkingLotNumber,
-                    available: "isAvailable"
-                };
 
-            console.log(JSON.stringify(availabilityData));
-/*
             // Prüfung, ob die Eingabe eine Zahl ist
             if (isNaN(parkingLotNumber)) {
                 alert('Bitte geben Sie eine gültige Parkplatznummer (Zahl) ein.');
@@ -84,10 +77,32 @@
                 // JSON-String 
                 var availabilityJson = JSON.stringify(availabilityData);
 
-                // Weiterleitung zur Reservierungsseite mit den JSON-Daten als Query-Parameter
-                window.location.href = 'reservierung.html?data=' + encodeURIComponent(availabilityJson);
-            }*/
-        }
+                var url = '/reservierung';
+
+// Die GET-Anfrage durchführen
+fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: availabilityJson
+})
+fetch('/getReservierung', {
+    method: 'GET'
+}).then(() => {
+    window.location.href = '/reservierung.html'; 
+});
+}}
+    /*.then(response => response.json())
+    .then(data => {
+        console.log('Erfolg:', data);
+    })
+    .catch(error => {
+        console.error('Fehler:', error);
+    });
+                
+            }
+        }*/
     </script>
 
 </body>
