@@ -1,5 +1,6 @@
 const Parkhaus = require('./framework/Parkhaus.js'); // Passe den Pfad entsprechend an
 const Parkplatz = require('./framework/Parkplatz.js'); // Passe den Pfad entsprechend an
+const DBManagement = require('./framework/DBManagement.js');
 
 const express = require('express');
 const path = require('path');
@@ -19,8 +20,25 @@ app.get('/index', (req, res) => {
 //Alle Daten des Parkhaus
 app.get('/', (req, res) => {
 
-    const ParkhausData = new Parkhaus("1", "Parkhaus 1", "Musterstraße 1");
-    res.send(ParkhausData.parkhausOverview());
+    const DBManagementInstanz1 = new DBManagement();
+    const DBJsonData = DBManagementInstanz1.jsonDateiAuslesen('DB.json');
+
+
+    res.send(DBJsonData);
+
+})
+
+app.get('/update',(req,res) => {
+    //hier wird das updaten der DB.json implimentiert
+    const DBManagementInstanz2 = new DBManagement();
+
+    DBManagementInstanz2.dbDateiUpdaten(1, 'belegt');
+    DBManagementInstanz2.dbDateiUpdaten(3, 'belegt');
+    DBManagementInstanz2.dbDateiUpdaten(5, 'belegt');
+    DBManagementInstanz2.dbDateiUpdaten(7, 'belegt');
+    DBManagementInstanz2.dbDateiUpdaten(9, 'belegt');
+
+    res.send(DBManagementInstanz2.jsonDateiAuslesen('./DB/DB.json'));
 
 })
 

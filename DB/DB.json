@@ -1,0 +1,90 @@
+{
+  "parkhaus": {
+    "name": "Parkhaus 1",
+    "standort": "Musterstraße 1",
+    "kapazitaet": 20,
+    "verfuegbarePlaetze": 20,
+    "parkplaetze": [
+      {
+        "platzNummer": 1,
+        "status": "belegt"
+      },
+      {
+        "platzNummer": 2,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 3,
+        "status": "belegt"
+      },
+      {
+        "platzNummer": 4,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 5,
+        "status": "belegt"
+      },
+      {
+        "platzNummer": 6,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 7,
+        "status": "belegt"
+      },
+      {
+        "platzNummer": 8,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 9,
+        "status": "belegt"
+      },
+      {
+        "platzNummer": 10,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 11,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 12,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 13,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 14,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 15,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 16,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 17,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 18,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 19,
+        "status": "frei"
+      },
+      {
+        "platzNummer": 20,
+        "status": "frei"
+      }
+    ]
+  }
+}

@@ -69,6 +69,10 @@ class Ticket {
 
     }
 
+    leseanAusDatei(){
+        return fs.readFileSync('DB.json', 'utf-8');
+    }
+
     setStundeZeitAusstempeln(zeitInStunden){
         if(!this.zeitAusstempeln){
             this.zeitAusstempeln = new Date();
@@ -102,3 +106,4 @@ class Ticket {
 const ticket1 = new Ticket(1, 2.5);
 ticket1.einfahren();
 ticket1.ausstempeln();
+console.log(ticket1.leseanAusDatei());
