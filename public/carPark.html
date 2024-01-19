@@ -20,18 +20,14 @@
 
         parken() {
             this.belegt = true;
-            console.log(`Parkplatz ${this.id} wurde belegt.`);
+            console.log(`Parkplatz ${this.id} ist belegt.`);
 			this.parkhaus.anzahlBegegterParkplaetze++;
         }
 
         verlassen() {
             this.belegt = false;
-            console.log(`Parkplatz ${this.id} wurde freigegeben.`);
+            console.log(`Parkplatz ${this.id} ist freigegeben.`);
 			this.parkhaus.anzahlBegegterParkplaetze--;
-        }
-
-        sendeNachricht(message) {
-            console.log(`Nachricht von Parkplatz ${this.id}: ${message}`);
         }
     }
 	
@@ -59,28 +55,56 @@
     }
 	
 	class Ticket {
-    constructor(id, kostenPer30Min) {
-        this.id = id;
-        this.kostenPer30Min = kostenPer30Min;
-        this.zeitEinfahren = null;
-        this.zeitAusstempeln = null;
-    }
+        constructor(id, kostenPer30Min) {
+            this.id = id;
+            this.kostenPer30Min = kostenPer30Min;
+            this.zeitEinfahren = null;
+            this.zeitAusstempeln = null;
+        }
 
-    einfahren() {
-        this.zeitEinfahren = new Date();
-        console.log(`Kunde mit Ticket ${this.id} ist eingefahren um ${this.zeitEinfahren}`);
-    }
+        einfahren() {
+            this.zeitEinfahren = new Date();
+            const einfahrenInfo = {
+                ticketId: this.id,
+                zeitEinfahren: this.zeitEinfahren.toISOString(),
+                message: `Kunde mit Ticket ${this.id} ist um ${this.zeitEinfahren} eingefahren `,
+            };
+        
+            return JSON.stringify(einfahrenInfo);
+        }
 
-    ausstempeln(){
-        this.zeitAusstempeln = new Date();
-        console.log(`Kunde mit Ticket ${this.id} hat sich um ${this.zeitAusstempeln} ausgesptempelt `);     
-    }
+        ausstempeln(){
+            this.zeitAusstempeln = new Date();
+            const AusstempelnInfo = {
+                ticketId: this.id,
+                zeitAusstempeln: this.zeitAusstempeln.toISOString(),
+                message: `Kunde mit Ticket ${this.id} hat sich um ${this.zeitAusstempeln} ausgesptempelt `,
+            };
+        
+            return JSON.stringify(AusstempelnInfo);
+        }
 
-    ZietHinzufügenInStunden(zeitInStunden){
-        this.zeitAusstempeln.setHours(zeitInStunden);   
-    }
+        setStundeZeitAusstempeln(zeitInStunden){
+            this.zeitAusstempeln.setHours(zeitInStunden);   
+        }
 
-}
+        setMinutenZeitAusstempeln(zeitInMinuten){
+            this.zeitAusstempeln.setMinutes(zeitInMinuten);
+        }
+
+        berechneZeitdifferenInMin(){
+            
+            return (this.zeitAusstempeln.getHours() * 60 + this.zeitAusstempeln.getMinutes()) - 
+                   (this.zeitEinfahren.getHours()* 60 + this.zeitEinfahren.getMinutes()); 
+        }
+
+        berechneKosten(){
+           
+            return Math.ceil(this.berechneZeitdifferenInMin() / 30) * this.kostenPer30Min;
+        }
+
+
+    }
 	
 	class Reservierung{
 		constructor(id, parkhaus, parkpaltz, laengeReserviereungInMin){
@@ -88,10 +112,6 @@
 		this.parkhaus = parkhaus;
 		this.parkplatz = parkpaltz;
 		this.laengeReservierungInMin = laengeReserviereungInMin;
-		}
-		
-		reservieren(){
-		this.parkplatz.parken();
 		}
 	}
 	
@@ -129,14 +149,14 @@
     const parkplatz1 = new Parkplatz(1, false, parkhaus);
     const parkplatz2 = new Parkplatz(2, true, parkhaus);
 	
-	const ticket1 = new Ticket(1, 2);
+	const ticket1 = new Ticket(1, 2.5);
 
     parkhaus.parkplaetze.push(parkplatz1, parkplatz2);
 
     const webInterface = new ParkplatzWeb(parkhaus);
 
     // Beispielaufrufe
-	parkhaus.einfahren();
+	/*parkhaus.einfahren();
     parkplatz1.parken();
 	parkhaus.einfahren();
     parkplatz2.parken();
@@ -144,11 +164,17 @@
 	parkhaus.ausfahren();
     webInterface.zeigeParkplatzStatus();
     webInterface.bezahleMitPayPal(5.0);
-	
-    ticket1.einfahren();
+	*/
+    console.log(ticket1.einfahren());
     ticket1.ausstempeln();
-    ticket1.ZietHinzufügenInStunden(22);
+    ticket1.setStundeZeitAusstempeln(new Date().getHours() + 1);
     console.log(ticket1.zeitAusstempeln);
+    console.log(ticket1.berechneZeitdifferenInMin());
+    console.log(ticket1.berechneKosten());
+    ticket1.setMinutenZeitAusstempeln(new Date().getMinutes() + 2);
+    console.log(ticket1.berechneKosten());
+    ticket1.setMinutenZeitAusstempeln(new Date().getMinutes() + 32);
+    console.log(ticket1.berechneKosten());
 </script>
 
 </body>
