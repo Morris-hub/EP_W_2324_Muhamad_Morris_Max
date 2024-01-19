@@ -1,0 +1,34 @@
+[
+  {
+    "aktion": "einfahren",
+    "data": {
+      "ticketId": 1,
+      "zeitEinfahren": "2024-01-19T18:12:37.384Z",
+      "message": "Kunde mit Ticket 1 ist um Fri Jan 19 2024 19:12:37 GMT+0100 (Mitteleuropäische Normalzeit) eingefahren "
+    }
+  },
+  {
+    "aktion": "ausstempeln",
+    "data": {
+      "ticketId": 1,
+      "zeitAusstempeln": "2024-01-19T18:12:37.387Z",
+      "message": "Kunde mit Ticket 1 hat sich um Fri Jan 19 2024 19:12:37 GMT+0100 (Mitteleuropäische Normalzeit) ausgestempelt"
+    }
+  },
+  {
+    "aktion": "einfahren",
+    "data": {
+      "ticketId": 1,
+      "zeitEinfahren": "2024-01-19T18:13:00.320Z",
+      "message": "Kunde mit Ticket 1 ist um Fri Jan 19 2024 19:13:00 GMT+0100 (Mitteleuropäische Normalzeit) eingefahren "
+    }
+  },
+  {
+    "aktion": "ausstempeln",
+    "data": {
+      "ticketId": 1,
+      "zeitAusstempeln": "2024-01-19T18:13:00.322Z",
+      "message": "Kunde mit Ticket 1 hat sich um Fri Jan 19 2024 19:13:00 GMT+0100 (Mitteleuropäische Normalzeit) ausgestempelt"
+    }
+  }
+]

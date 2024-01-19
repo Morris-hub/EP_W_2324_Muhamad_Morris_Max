@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
     const ParkhausData = new Parkhaus("1", "Parkhaus 1", "Musterstraße 1");
     res.send(ParkhausData.parkhausOverview());
 
+})
 
 app.post('/reservierung',(req,res) => {
     console.log('JSON:', req.body);
