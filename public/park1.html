@@ -46,10 +46,9 @@
             <h2>Verfügbarkeit prüfen</h2>
             <form id="availabilityForm">
                 <label for="parkingLot">Parkplatznummer:</label>
-                <input type="text" id="parkingLot" name="parkingLot" required>
+                <input type="text" id="parkingID" name="parkingLot" required>
                 <button type="button" onclick="checkAvailability()">Verfügbarkeit prüfen</button>
             </form>
-            <p id="availabilityMessage"></p>
         </section>
     </main>
 
@@ -58,15 +57,38 @@
     </footer>
 
     <script>
-        // Beispiel JavaScript-Funktion
+        //JavaScript-Funktion
         function checkAvailability() {
-            // Hier könntest du den Code für die Verfügbarkeitsprüfung einfügen
-            // Angenommen, die Verfügbarkeit wurde bestätigt
-            document.getElementById('availabilityMessage').innerText = 'Parkplatz verfügbar! Weiter zur Reservierung...';
+            var parkingLotNumber = document.getElementById('parkingID').value;
+            
+             var availabilityData = {
+                    parkingLot: parkingLotNumber,
+                    available: "isAvailable"
+                };
 
-            // Weiterleitung zur Reservierungsseite nach 2 Sekunden
-            setTimeout(function() {
-                window.location.href = 'reservierung.html';
-            }, 2000);
+            console.log(JSON.stringify(availabilityData));
+/*
+            // Prüfung, ob die Eingabe eine Zahl ist
+            if (isNaN(parkingLotNumber)) {
+                alert('Bitte geben Sie eine gültige Parkplatznummer (Zahl) ein.');
+            } else {
+                // Hier sollte die eigentliche Verfügbarkeitsprüfung durchgeführt werden
+                var isAvailable = true; // Beispiel: immer verfügbar
+
+                // Hier wird das JavaScript-Objekt mit Verfügbarkeitsdaten erstellt
+                var availabilityData = {
+                    parkingLot: parkingLotNumber,
+                    available: isAvailable
+                };
+
+                // JSON-String 
+                var availabilityJson = JSON.stringify(availabilityData);
+
+                // Weiterleitung zur Reservierungsseite mit den JSON-Daten als Query-Parameter
+                window.location.href = 'reservierung.html?data=' + encodeURIComponent(availabilityJson);
+            }*/
         }
     </script>
+
+</body>
+</html>
