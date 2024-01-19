@@ -1,5 +1,4 @@
 const Parkhaus = require('./framework/Parkhaus.js'); // Passe den Pfad entsprechend an
-const Parkhaus2 = require('./framework/Parkhaus2.js'); // Passe den Pfad entsprechend an
 const Parkplatz = require('./framework/Parkplatz.js'); // Passe den Pfad entsprechend an
 
 const express = require('express');
@@ -12,15 +11,13 @@ app.use(express.static('public'));
 
 
 app.get('/index', (req, res) => {
-    const ParkhausData2 = new Parkhaus2("1", "Parkhaus 1", "Musterstraße 1");
-    ParkhausData2.toJSON();
 });
 
 //Alle Daten des Parkhaus
 app.get('/', (req, res) => {
 
     const ParkhausData = new Parkhaus("1", "Parkhaus 1", "Musterstraße 1");
-    res.send(ParkhausData.erstelleJSON());
+    res.send(ParkhausData.parkhausOverview());
 });
 
 
