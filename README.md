@@ -1,6 +1,6 @@
 # Smarte Parkplatzlösungen 
 
-## Einleitung
+## Problemstellung
 
 Die Suche nach einem Parkplatz ist für viele Menschen eine alltägliche Herausforderung, die nicht nur kostbare Zeit, sondern auch Nerven raubt. In urbanen Gebieten und Ballungszentren kann das Finden eines freien Parkplatzes zu einem regelrechten Albtraum werden. Dieses System beleuchtet die Problematik des Parkplatzmangels und präsentiert eine innovative Lösung: Smarte Parkplatzlösungen mit den Schwerpunkten Reservierung, Navigation und Verfügbarkeit.
 
